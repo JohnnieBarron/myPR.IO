@@ -11,7 +11,11 @@ const userSchema = new Schema(
     lastName: { type: String, required: true },
     age: { type: Number, required: true },
     height: { type: Number, required: true },
-    gender: { type: Boolean, required: true },
+    gender: {
+      type: String,
+      required: true,
+      enum: ['male', 'female'],
+    },
     exp: { type: Number },
     level: { type: Number },
     email: {

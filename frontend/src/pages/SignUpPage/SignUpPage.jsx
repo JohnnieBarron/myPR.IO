@@ -4,7 +4,12 @@ import { signUp } from '../../services/authService';
 
 export default function SignUpPage({ setUser }) {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
+    firstName: '',
+    lastName: '',
+    age: '',
+    height: '',
+    gender: '',
     email: '',
     password: '',
     confirm: '',
@@ -35,14 +40,72 @@ export default function SignUpPage({ setUser }) {
     <>
       <h2>Sign Up!</h2>
       <form autoComplete="off" onSubmit={handleSubmit}>
-        <label>Name</label>
+        <label>User Name</label>
         <input
           type="text"
-          name="name"
-          value={formData.name}
+          name="username"
+          value={formData.username}
           onChange={handleChange}
           required
         />
+        <label>First Name</label>
+        <input
+          type="text"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleChange}
+          required
+        />
+        <label>Last Name</label>
+        <input
+          type="text"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
+          required
+        />
+        <label>Age</label>
+        <input
+          type="number"
+          name="age"
+          value={formData.age}
+          onChange={handleChange}
+          required
+        />
+        <label>Height (in inches)</label>
+          <input
+            type="number"
+            name="height"
+            value={formData.height}
+            onChange={handleChange}
+            required
+            min="0"
+          />
+        <label>Gender</label>
+        <div>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="male"
+              checked={formData.gender === 'male'}
+              onChange={handleChange}
+              required
+            />
+            Male
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="female"
+              checked={formData.gender === 'female'}
+              onChange={handleChange}
+              required
+            />
+            Female
+          </label>
+        </div>
         <label>Email</label>
         <input
           type="email"
