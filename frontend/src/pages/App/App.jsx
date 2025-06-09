@@ -9,6 +9,7 @@ import LogInPage from '../LogInPage/LogInPage';
 import NavBar from '../../components/NavBar/NavBar';
 import StatSummary from '../../components/statSummary/statSummary';
 import CompTracker from '../../components/CompTracker/CompTracker';
+import AchevementTracker from '../../components/AchevementTracker/AchevementTracker';
 import './App.css';
 
 
@@ -35,12 +36,17 @@ export default function App() {
           </Routes>
         )}
       </section>
+      <div>
         <StatSummary />
         {user && user.progress ? (
             <CompTracker progress={user.progress} />
           ) : (
             <p>No progress data available.</p>
         )}
+      </div>
+      <div>
+        <AchevementTracker />
+      </div>
     </main>
   );
 }

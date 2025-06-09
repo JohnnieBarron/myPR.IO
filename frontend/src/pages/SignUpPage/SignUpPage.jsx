@@ -105,7 +105,7 @@ export default function SignUpPage({ setUser }) {
             required
             min="0"
           />
-        <label>Body Fat</label>
+        <label>Body Fat percentage</label>
           <input
             type="number"
             name="bfPercent"
