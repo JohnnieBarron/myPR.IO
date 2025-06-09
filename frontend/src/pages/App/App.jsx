@@ -7,9 +7,7 @@ import NewPostPage from '../NewPostPage/NewPostPage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LogInPage from '../LogInPage/LogInPage';
 import NavBar from '../../components/NavBar/NavBar';
-import StatSummary from '../../components/statSummary/statSummary';
 import CompTracker from '../../components/CompTracker/CompTracker';
-import AchevementTracker from '../../components/AchevementTracker/AchevementTracker';
 import './App.css';
 
 
@@ -22,7 +20,10 @@ export default function App() {
       <section id="main-section">
         {user ? (
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage 
+            progress={user.progress}
+            user={user}
+            />} />
             <Route path="/posts" element={<PostListPage />} />
             <Route path="/posts/new" element={<NewPostPage />} />
             <Route path="*" element={null} />
@@ -36,17 +37,7 @@ export default function App() {
           </Routes>
         )}
       </section>
-      <div>
-        <StatSummary />
-        {user && user.progress ? (
-            <CompTracker progress={user.progress} />
-          ) : (
-            <p>No progress data available.</p>
-        )}
-      </div>
-      <div>
-        <AchevementTracker />
-      </div>
+    
     </main>
   );
 }
