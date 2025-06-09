@@ -7,7 +7,10 @@ import NewPostPage from '../NewPostPage/NewPostPage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LogInPage from '../LogInPage/LogInPage';
 import NavBar from '../../components/NavBar/NavBar';
+import StatSummary from '../../components/statSummary/statSummary';
+import CompTracker from '../../components/CompTracker/CompTracker';
 import './App.css';
+
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -32,6 +35,12 @@ export default function App() {
           </Routes>
         )}
       </section>
+        <StatSummary />
+        {user && user.progress ? (
+            <CompTracker progress={user.progress} />
+          ) : (
+            <p>No progress data available.</p>
+        )}
     </main>
   );
 }

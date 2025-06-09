@@ -9,11 +9,12 @@ export default function SignUpPage({ setUser }) {
     lastName: '',
     age: '',
     height: '',
-    weight: '',
     gender: '',
     email: '',
     password: '',
     confirm: '',
+    weight: '',
+    bfPercent: '',
   });
   const [errorMsg, setErrorMsg] = useState('');
    
@@ -25,15 +26,28 @@ export default function SignUpPage({ setUser }) {
   }
 
   async function handleSubmit(evt) {
-    evt.preventDefault();
-    try {
-      const user = await signUp(formData);
-      setUser(user);
-      navigate('/');
-    } catch (err) {
-      setErrorMsg('Sign Up Failed - Try Again');
-    }
+  evt.preventDefault();
+  try {
+    const { weight, bfPercent, confirm, ...rest } = formData;
+
+    const userData = {
+      ...rest,
+      progress: [
+        {
+          weight: Number(weight),
+          bfPercent: Number(bfPercent),
+        },
+      ],
+    };
+
+    const user = await signUp(userData);
+    setUser(user);
+    navigate('/');
+  } catch (err) {
+    setErrorMsg('Sign Up Failed - Try Again');
   }
+}
+
 
   const disable = formData.password !== formData.confirm;
 
