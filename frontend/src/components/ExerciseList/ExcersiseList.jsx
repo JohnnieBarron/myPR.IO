@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import * as exerciseService from '../../services/exerciseServices';
 import { useNavigate } from 'react-router';
 
-
 function ExerciseList() {
   const [exercises, setExercises] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCardio, setFilterCardio] = useState(true);
   const [filterResistance, setFilterResistance] = useState(true);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     async function fetchExercises() {
@@ -23,13 +21,21 @@ function ExerciseList() {
     fetchExercises();
   }, []);
 
-  //  Filtering logic
-  const filteredExercises = exercises.filter((exercise) => {
-    const matchesSearch = exercise.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory =
-      (filterCardio && exercise.category === 'cardio') ||
-      (filterResistance && exercise.category === 'resistance');
+  // Group exercises by name
+  const groupedExercises = exercises.reduce((acc, exercise) => {
+    const name = exercise.name;
+    if (!acc[name]) acc[name] = [];
+    acc[name].push(exercise);
+    return acc;
+  }, {});
 
+  // Filtered + searched list
+    const filteredGroupKeys = Object.keys(groupedExercises).filter((name) => {
+    const sample = groupedExercises[name][0];
+    const matchesSearch = name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      (filterCardio && sample.category === 'cardio') ||
+      (filterResistance && sample.category === 'resistance');
     return matchesSearch && matchesCategory;
   });
 
@@ -37,7 +43,7 @@ function ExerciseList() {
     <div>
       <h1>Exercise List</h1>
 
-      {/*  Search Bar */}
+      {/* Search Bar */}
       <input
         type="text"
         placeholder="Search exercises..."
@@ -45,8 +51,8 @@ function ExerciseList() {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
 
-      {/*  Category Filters */}
-      <div >
+      {/* Category Filters */}
+      <div>
         <label>
           <input
             type="checkbox"
@@ -65,23 +71,26 @@ function ExerciseList() {
         </label>
       </div>
 
-      {/*  Exercise List */}
-      {filteredExercises.length > 0 ? (
+      {/* Exercise Name List */}
+      {filteredGroupKeys.length > 0 ? (
         <ul>
-          {filteredExercises.map((ex) => (
-            <li key={ex._id}>
-              {ex.name} — {ex.category} — {new Date(ex.date).toLocaleDateString()}
-            </li>
-          ))}
+            {filteredGroupKeys.map((name) => {
+                const firstExercise = groupedExercises[name][0]; 
+                return (
+                <li key={firstExercise._id}>
+                    <button onClick={() => navigate(`/exercises/${firstExercise._id}`)}>
+                    {name}
+                    </button> ({groupedExercises[name].length} entries)
+                </li>
+                );
+            })}
         </ul>
       ) : (
         <p>No exercises match your criteria.</p>
       )}
 
-       {/*  New Exercise Button */}
-      <button
-        onClick={() => navigate('/exercises/new')}
-      >
+      {/* Add New Exercise Button */}
+      <button onClick={() => navigate('/exercises/new')}>
         ➕ Add New Exercise
       </button>
     </div>
