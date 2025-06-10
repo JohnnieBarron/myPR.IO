@@ -23,4 +23,4 @@ const exerciseSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model('Post', exerciseSchema);
+module.exports = mongoose.model('Exercise', exerciseSchema);
