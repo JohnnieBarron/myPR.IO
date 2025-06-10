@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import * as exerciseService from '../../services/exerciseServices';
 import { useNavigate } from 'react-router';
 

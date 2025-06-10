@@ -3,18 +3,20 @@ const router = express.Router();
 const exerciseCtrl = require('../controllers/exercise');
 const ensureLoggedIn = require('../middleware/ensureLoggedIn');
 
-// All paths start with '/api/posts'
+// All paths start with '/api/exercise'
 
 // Protect all defined routes
 router.use(ensureLoggedIn);
 
-// GET /api/posts (INDEX action)
+// GET /api/exercise (INDEX action)
 router.get('/', exerciseCtrl.index);
-// POST /api/posts (CREATE action)
+// POST /api/exercise (CREATE action)
 router.post('/', exerciseCtrl.create);
-// PUT /api/exercise/:id
+// PUT /api/exercise/:_id
 router.put('/:id', exerciseCtrl.update);
-// DELETE /api/exercise/:id
+// DELETE /api/exercise/:_id
 router.delete('/:id', exerciseCtrl.remove);
+// SHOW /api/exercise/:_id
+router.get('/:id', exerciseCtrl.show);
 
 module.exports = router;

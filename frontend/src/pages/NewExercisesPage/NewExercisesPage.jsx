@@ -4,9 +4,11 @@ import * as exercisesService from '../../services/exerciseServices';
 
 export default function NewExercisesPage() {
   const [name, setName] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [category, setCategory] = useState('resistance');
-  const [progress, setProgress] = useState([{ sets: '', reps: '', weight: '' }]);
+  const [progress, setProgress] = useState([
+    { sets: '', reps: '', weight: '', duration: '', distance: '' }
+  ]);
   const [errorMsg, setErrorMsg] = useState('');
 
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ export default function NewExercisesPage() {
   }
 
   function addProgressEntry() {
-    setProgress([...progress, { sets: '', reps: '', weight: '' }]);
+    setProgress([...progress, { sets: '', reps: '', weight: '', duration: '', distance: '' }]);
   }
 
   async function handleSubmit(evt) {
@@ -32,6 +34,8 @@ export default function NewExercisesPage() {
           sets: Number(p.sets),
           reps: Number(p.reps),
           weight: Number(p.weight),
+          duration: Number(p.duration),
+          distance: Number(p.distance),
         }))
       });
       navigate('/exercises');
@@ -59,15 +63,47 @@ export default function NewExercisesPage() {
         <h4>Progress</h4>
         {progress.map((entry, index) => (
           <div key={index}>
-            <label>Set:</label>
-            <input type="number" value={entry.sets} onChange={e => handleProgressChange(index, 'sets', e.target.value)} />
-            <label>Reps:</label>
-            <input type="number" value={entry.reps} onChange={e => handleProgressChange(index, 'reps', e.target.value)} />
-            <label>Weight:</label>
-            <input type="number" value={entry.weight} onChange={e => handleProgressChange(index, 'weight', e.target.value)} />
+            {category === 'resistance' && (
+              <>
+                <label>Set:</label>
+                <input
+                  type="number"
+                  value={entry.sets}
+                  onChange={e => handleProgressChange(index, 'sets', e.target.value)}
+                />
+                <label>Reps:</label>
+                <input
+                  type="number"
+                  value={entry.reps}
+                  onChange={e => handleProgressChange(index, 'reps', e.target.value)}
+                />
+                <label>Weight:</label>
+                <input
+                  type="number"
+                  value={entry.weight}
+                  onChange={e => handleProgressChange(index, 'weight', e.target.value)}
+                />
+              </>
+            )}
+            {category === 'cardio' && (
+              <>
+                <label>Duration (minutes):</label>
+                <input
+                  type="number"
+                  value={entry.duration}
+                  onChange={e => handleProgressChange(index, 'duration', e.target.value)}
+                />
+                <label>Distance (miles):</label>
+                <input
+                  type="number"
+                  value={entry.distance}
+                  onChange={e => handleProgressChange(index, 'distance', e.target.value)}
+                />
+              </>
+            )}
           </div>
         ))}
-        <button type="button" onClick={addProgressEntry}>Add Another Set</button>
+        <button type="button" onClick={addProgressEntry}>Add Another Entry</button>
         <br />
         <button type="submit">Add Exercise</button>
       </form>

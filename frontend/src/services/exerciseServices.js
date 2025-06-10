@@ -17,3 +17,7 @@ export async function update(id, exerciseData) {
 export async function remove(id) {
   return sendRequest(`${BASE_URL}/${id}`, 'DELETE');
 }
+
+export async function getById(id) {
+  return sendRequest(`/api/exercise/${id}`);
+}

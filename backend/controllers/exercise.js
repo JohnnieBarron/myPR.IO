@@ -4,7 +4,8 @@ module.exports = {
   index,
   create,
   update,
-  remove
+  remove,
+  show,
 };
 
 
@@ -57,6 +58,16 @@ async function remove(req, res) {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Failed to delete exercise' });
+  }
+}
+
+async function show(req, res) {
+  try {
+    const exercise = await Exercise.findById(req.params.id);
+    res.json(exercise);
+  } catch (err) {
+    console.error(err);
+    res.status(404).json({ message: 'Exercise not found' });
   }
 }
 
