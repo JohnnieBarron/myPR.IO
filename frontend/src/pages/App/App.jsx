@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router';
 import { getUser } from '../../services/authService';
 import HomePage from '../HomePage/HomePage';
-import ExerciseListPage from '../ExerciseList/ExerciseList'
+import ExerciseListPage from '../ExercisePage/ExercisePage'
 import NewPostPage from '../NewPostPage/NewPostPage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LogInPage from '../LogInPage/LogInPage';

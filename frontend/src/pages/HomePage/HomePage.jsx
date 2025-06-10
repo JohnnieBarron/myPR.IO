@@ -1,4 +1,4 @@
-import StatSummary from '../../components/statSummary/statSummary';
+import StatSummary from '../../components/StatSummary/StatSummary';
 import CompTracker from '../../components/CompTracker/CompTracker';
 import AchevementTracker from '../../components/AchevementTracker/AchevementTracker';
 

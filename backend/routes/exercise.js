@@ -12,5 +12,9 @@ router.use(ensureLoggedIn);
 router.get('/', exerciseCtrl.index);
 // POST /api/posts (CREATE action)
 router.post('/', exerciseCtrl.create);
+// PUT /api/exercise/:id
+router.put('/:id', exerciseCtrl.update);
+// DELETE /api/exercise/:id
+router.delete('/:id', exerciseCtrl.remove);
 
 module.exports = router;

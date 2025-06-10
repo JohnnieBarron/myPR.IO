@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import * as exerciseService from '../../services/exerciseServices';
+import ExerciseList from '../../components/ExerciseList/ExcersiseList'
 
 export default function ExerciseListPage() {
   const [exercise, setExercise] = useState([]);
@@ -14,14 +15,8 @@ export default function ExerciseListPage() {
 
   return (
   <>
-    <h1>Exercise List</h1>
-    <ul>
-      {exercise.map((ex, index) => (
-        <li key={index}>
-          {ex.name} — {ex.category} on {new Date(ex.date).toLocaleDateString()}
-        </li>
-      ))}
-    </ul>
+    <h1>Exercise Page</h1>
+    <ExerciseList />
   </>
 );
 }

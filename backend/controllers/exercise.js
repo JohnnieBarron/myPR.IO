@@ -2,8 +2,11 @@ const Exercise = require('../models/exercise');
 
 module.exports = {
   index,
-  create
+  create,
+  update,
+  remove
 };
+
 
 async function index(req, res) {
   try {
@@ -26,4 +29,35 @@ async function create(req, res) {
     res.status(400).json({ message: 'Failed to creat exercise' });
   }
 }
+
+async function update(req, res) {
+  try {
+    const updatedExercise = await Exercise.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true } 
+    );
+    if (!updatedExercise) {
+      return res.status(404).json({ message: 'Exercise not found' });
+    }
+    res.json(updatedExercise);
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ message: 'Failed to update exercise' });
+  }
+}
+
+async function remove(req, res) {
+  try {
+    const deletedExercise = await Exercise.findByIdAndDelete(req.params.id);
+    if (!deletedExercise) {
+      return res.status(404).json({ message: 'Exercise not found' });
+    }
+    res.json({ message: 'Exercise deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to delete exercise' });
+  }
+}
+
 
