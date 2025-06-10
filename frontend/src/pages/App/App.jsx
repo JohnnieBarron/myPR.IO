@@ -3,11 +3,12 @@ import { Routes, Route } from 'react-router';
 import { getUser } from '../../services/authService';
 import HomePage from '../HomePage/HomePage';
 import ExerciseListPage from '../ExercisePage/ExercisePage'
-import NewPostPage from '../NewPostPage/NewPostPage';
+import NewExercisesPage from '../NewExercisesPage/NewExercisesPage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LogInPage from '../LogInPage/LogInPage';
 import NavBar from '../../components/NavBar/NavBar';
 import './App.css';
+
 
 
 export default function App() {
@@ -24,7 +25,7 @@ export default function App() {
             user={user}
             />} />
             <Route path="/exercises" element={<ExerciseListPage />} />
-            <Route path="/posts/new" element={<NewPostPage />} />
+            <Route path="/exercises/new" element={<NewExercisesPage />} />
             <Route path="*" element={null} />
           </Routes>
         ) : (
