@@ -21,7 +21,18 @@ function ExerciseList() {
     fetchExercises();
   }, []);
 
-  // Filter by search + category
+  async function handleDelete(id) {
+    const confirmed = window.confirm('Are you sure you want to delete this exercise?');
+    if (!confirmed) return;
+
+    try {
+      await exerciseService.remove(id);
+      setExercises(prev => prev.filter(ex => ex._id !== id));
+    } catch (err) {
+      console.error('Failed to delete exercise:', err);
+    }
+  }
+
   const filteredExercises = exercises.filter((exercise) => {
     const matchesSearch = exercise.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory =
@@ -34,7 +45,6 @@ function ExerciseList() {
     <div>
       <h1>Exercise List</h1>
 
-      {/* Search Bar */}
       <input
         type="text"
         placeholder="Search exercises..."
@@ -42,7 +52,6 @@ function ExerciseList() {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
 
-      {/* Category Filters */}
       <div>
         <label>
           <input
@@ -62,7 +71,6 @@ function ExerciseList() {
         </label>
       </div>
 
-      {/* List of Exercises */}
       {filteredExercises.length > 0 ? (
         <ul>
           {filteredExercises.map((exercise) => (
@@ -70,7 +78,9 @@ function ExerciseList() {
               <button onClick={() => navigate(`/exercises/${exercise._id}`)}>
                 {exercise.name}
               </button>{' '}
-              ({exercise.category}, {new Date(exercise.progress[0]?.date).toLocaleDateString()})
+              ({exercise.category},{' '}
+              {new Date(exercise.progress[0]?.date).toLocaleDateString()})
+              <button onClick={() => handleDelete(exercise._id)}>🗑️ Delete</button>
             </li>
           ))}
         </ul>
@@ -78,7 +88,6 @@ function ExerciseList() {
         <p>No exercises match your criteria.</p>
       )}
 
-      {/* Add New Exercise */}
       <button onClick={() => navigate('/exercises/new')}>➕ Add New Exercise</button>
     </div>
   );
