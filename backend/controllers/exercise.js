@@ -23,13 +23,17 @@ async function index(req, res) {
 
 async function create(req, res) {
   try {
-    const exercise = await Exercise.create(req.body);
+    const exercise = await Exercise.create({
+      ...req.body,
+      user: req.user._id,
+    });
     res.json(exercise);
   } catch (err) {
     console.log(err);
-    res.status(400).json({ message: 'Failed to creat exercise' });
+    res.status(400).json({ message: 'Failed to create exercise' });
   }
 }
+
 
 async function update(req, res) {
   try {

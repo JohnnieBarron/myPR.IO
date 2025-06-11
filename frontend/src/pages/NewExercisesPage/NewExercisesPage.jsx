@@ -28,9 +28,9 @@ export default function NewExercisesPage() {
     try {
       await exercisesService.create({
         name,
-        date,
         category,
         progress: progress.map(p => ({
+          date: new Date(date),
           sets: Number(p.sets),
           reps: Number(p.reps),
           weight: Number(p.weight),
@@ -103,8 +103,7 @@ export default function NewExercisesPage() {
             )}
           </div>
         ))}
-        <button type="button" onClick={addProgressEntry}>Add Another Entry</button>
-        <br />
+        
         <button type="submit">Add Exercise</button>
       </form>
       <p className="error-message">{errorMsg}</p>
