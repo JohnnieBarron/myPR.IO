@@ -22,12 +22,12 @@ function ExerciseList() {
   }, []);
 
   // Group exercises by name
-  const groupedExercises = exercises.reduce((acc, exercise) => {
-    const name = exercise.name;
-    if (!acc[name]) acc[name] = [];
-    acc[name].push(exercise);
-    return acc;
-  }, {});
+  // const groupedExercises = exercises.reduce((acc, exercise) => {
+  //   const name = exercise.name;
+  //   if (!acc[name]) acc[name] = [];
+  //   acc[name].push(exercise);
+  //   return acc;
+  // }, {});
 
   // Filtered + searched list
     const filteredGroupKeys = Object.keys(groupedExercises).filter((name) => {

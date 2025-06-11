@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const progressSchema = new Schema({
+    date: { type: Date, required: true },
     duration: { type: Number },
     distance: { type: Number },
     weight: { type: Number },
@@ -12,14 +13,13 @@ const progressSchema = new Schema({
 const exerciseSchema = new Schema(
   {
     name: { type: String, required: true },
-    date: { type: Date, required: true },
     category: {
       type: String,
       required: true,
       enum: ['cardio', 'resistance'],
     },
     progress: [progressSchema],
-    
+    user: {type: Schema.Types.ObjectId, required: true, ref: 'User' }
   },
   {
     timestamps: true,
