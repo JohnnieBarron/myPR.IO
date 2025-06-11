@@ -21,21 +21,12 @@ function ExerciseList() {
     fetchExercises();
   }, []);
 
-  // Group exercises by name
-  const groupedExercises = exercises.reduce((acc, exercise) => {
-    const name = exercise.name;
-    if (!acc[name]) acc[name] = [];
-    acc[name].push(exercise);
-    return acc;
-  }, {});
-
-  // Filtered + searched list
-    const filteredGroupKeys = Object.keys(groupedExercises).filter((name) => {
-    const sample = groupedExercises[name][0];
-    const matchesSearch = name.toLowerCase().includes(searchTerm.toLowerCase());
+  // Filter by search + category
+  const filteredExercises = exercises.filter((exercise) => {
+    const matchesSearch = exercise.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory =
-      (filterCardio && sample.category === 'cardio') ||
-      (filterResistance && sample.category === 'resistance');
+      (filterCardio && exercise.category === 'cardio') ||
+      (filterResistance && exercise.category === 'resistance');
     return matchesSearch && matchesCategory;
   });
 
@@ -71,28 +62,24 @@ function ExerciseList() {
         </label>
       </div>
 
-      {/* Exercise Name List */}
-      {filteredGroupKeys.length > 0 ? (
+      {/* List of Exercises */}
+      {filteredExercises.length > 0 ? (
         <ul>
-            {filteredGroupKeys.map((name) => {
-                const firstExercise = groupedExercises[name][0]; 
-                return (
-                <li key={firstExercise._id}>
-                    <button onClick={() => navigate(`/exercises/${firstExercise._id}`)}>
-                    {name}
-                    </button> ({groupedExercises[name].length} entries)
-                </li>
-                );
-            })}
+          {filteredExercises.map((exercise) => (
+            <li key={exercise._id}>
+              <button onClick={() => navigate(`/exercises/${exercise._id}`)}>
+                {exercise.name}
+              </button>{' '}
+              ({exercise.category}, {new Date(exercise.progress[0]?.date).toLocaleDateString()})
+            </li>
+          ))}
         </ul>
       ) : (
         <p>No exercises match your criteria.</p>
       )}
 
-      {/* Add New Exercise Button */}
-      <button onClick={() => navigate('/exercises/new')}>
-        ➕ Add New Exercise
-      </button>
+      {/* Add New Exercise */}
+      <button onClick={() => navigate('/exercises/new')}>➕ Add New Exercise</button>
     </div>
   );
 }
