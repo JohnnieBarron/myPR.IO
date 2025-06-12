@@ -2,9 +2,9 @@
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color: #0F0F0F;
-
+  
+  color: #E5E5E5;
+  background-color: #1f1f1f;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -35,7 +35,7 @@ button {
   font-size: 2vmin;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #a7a7a725;
   color: whitesmoke;
   cursor: pointer;
 }

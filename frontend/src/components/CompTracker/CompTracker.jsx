@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './CompTracker.css';
 import {
   LineChart,
   Line,
@@ -52,7 +53,7 @@ function CompTracker({ progress = [], onAddProgress }) {
   };
 
   return (
-    <div>
+    <div className='CompTrackerContainer'>
       <h2>Body Composition</h2>
 
       <ResponsiveContainer width="100%" height={300}>
@@ -84,41 +85,51 @@ function CompTracker({ progress = [], onAddProgress }) {
           <Line
             type="monotone"
             dataKey="weight"
-            stroke="#8884d8"
+            stroke="#00FFFF"
+            strokeWidth={2}
+            dot={{ stroke: '#00FFFF', strokeWidth: 2, r: 3 }}
             name="Weight (lbs)"
           />
           <Line
             type="monotone"
             dataKey="bfPercent"
-            stroke="#82ca9d"
+            stroke="#FF073A"
+            strokeDasharray="5 5"
+            strokeWidth={2}
+            dot={{ stroke: '#00FFFF', strokeWidth: 2, r: 3 }}
             name="Body Fat (%)"
           />
         </LineChart>
       </ResponsiveContainer>
 
-      <form onSubmit={handleSubmit} style={{ marginTop: '20px' }}>
-        <div>
-          <label>Weight (lbs): </label>
-          <input
-            type="number"
-            step="0.1"
-            value={weight}
-            onChange={(e) => setWeight(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Body Fat (%): </label>
-          <input
-            type="number"
-            step="0.1"
-            value={bfPercent}
-            onChange={(e) => setBfPercent(e.target.value)}
-          />
-        </div>
-        <button type="submit">Add Progress</button>
-        {error && <p>{error}</p>}
-        {success && <p>{success}</p>}
-      </form>
+        <form className="CompTrackerForm" onSubmit={handleSubmit}>
+          <div className='ComptrackerInputs'>
+            <div>
+              <label>Weight (lbs):</label>
+              <input
+                type="number"
+                step="0.1"
+                value={weight}
+                onChange={(e) => setWeight(e.target.value)}
+              />
+            </div>
+            <div className="FormGroup">
+              <label>Body Fat (%):</label>
+              <input
+                type="number"
+                step="0.1"
+                value={bfPercent}
+                onChange={(e) => setBfPercent(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <button type="submit">Log update</button>
+          {error && <p>{error}</p>}
+          {success && <p>{success}</p>}
+        </form>
+
+
     </div>
   );
 }

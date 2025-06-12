@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import achievements from '../../data/achievements'; 
+import './AchevementTracker.css';
 
 function evaluateAchievement(achievement, user) {
   if (!user) return { ...achievement, unlocked: false, progress: 0 };
@@ -77,7 +78,7 @@ function AchievementTracker({ user }) {
   }, [user]);
 
   return (
-    <div>
+    <div className='ATracker'>
       <h1>Achievements</h1>
       <ul>
         {sortedAchievements.map((ach) => (
