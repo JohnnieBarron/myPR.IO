@@ -18,7 +18,7 @@ export default function HomePage({ user }) {
 
   return (
     <div className='HomePageContainer'>
-      <h1>Home Page</h1>
+      
       <div>
         <div>
           <StatSummary user={user}/>
