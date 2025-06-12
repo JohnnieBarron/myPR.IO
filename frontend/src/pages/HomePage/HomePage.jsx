@@ -17,11 +17,11 @@ export default function HomePage({ user }) {
   }
 
   return (
-    <div>
+    <div className='HomePageContainer'>
       <h1>Home Page</h1>
       <div>
         <div>
-          <StatSummary />
+          <StatSummary user={user}/>
         </div>
         <div>
           {userData && userData.progress?.length > 0 ? (

@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+import './StatSummary.css';
 
-function StatSummary() {
+function StatSummary({ user }) {
   const [lastLoggedMeal, setLastLoggedMeal] = useState(0);
   const [lastLoggedExercise, setLastLoggedExercise] = useState(0);
   const [lastAchievement, setLastAchievement] = useState(0);
 
   return (
-    <div>
-      <h1>Hello from statSunnary</h1>
-      <p>lastLoggedMeal PH</p>
-      <p>lastLoggedExercise PH</p>
-      <p>lastAchievement PH</p>
+    <div className='StatSummary'>
+      <h1 className='StatGreeting'>Hello {user.firstName }</h1>
+      <p className='SummeryEntry'>lastLoggedMeal PH</p>
+      <p className='SummeryEntry'>lastLoggedExercise PH</p>
+      <p className='SummeryEntry'>lastAchievement PH</p>
     </div>
   );
 }
