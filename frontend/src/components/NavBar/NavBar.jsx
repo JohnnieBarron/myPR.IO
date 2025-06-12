@@ -22,9 +22,10 @@ export default function NavBar({ user, setUser }) {
           </NavLink>
           &nbsp; | &nbsp;
           <NavLink to="/posts/new">Meals</NavLink>
+          &nbsp;|&nbsp;
+          <NavLink to={`/users/${user._id}`}>Welcome, {user.firstName}</NavLink>
           &nbsp; | &nbsp;
           <Link to="/" onClick={handleLogOut}>Log Out</Link>
-          <span>Welcome, {user.firstName}</span>
         </>
       ) : (
         <>
