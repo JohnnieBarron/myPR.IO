@@ -18,7 +18,7 @@ router.get('/:id', userCtrl.show);
 router.put('/:id', userCtrl.update);
 
 // PUT /api/user/:id/progress
-router.put('/:id/progress', userCtrl.addProgress);
+
 
 
 

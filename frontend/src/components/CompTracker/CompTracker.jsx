@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './CompTracker.css';
+import * as weightService from '../../services/weightService';
 import {
   LineChart,
   Line,
@@ -11,21 +12,28 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-function CompTracker({ progress = [], onAddProgress }) {
-  
-
-  const chartData = progress.map(({ date, weight, bfPercent }) => ({
-    date: new Date(date).toISOString(),
-    weight,
-    bfPercent,
-  }));
-
+function CompTracker() {
+  const [weights, setWeights] = useState([]);
   const [weight, setWeight] = useState('');
   const [bfPercent, setBfPercent] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    async function fetchWeights() {
+      try {
+        const data = await weightService.index();
+        setWeights(data);
+      } catch (err) {
+        console.error('Failed to load weights:', err);
+        setError('Could not fetch weight history.');
+      }
+    }
+
+    fetchWeights();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const weightNum = parseFloat(weight);
@@ -39,21 +47,31 @@ function CompTracker({ progress = [], onAddProgress }) {
     const newEntry = {
       date: new Date().toISOString(),
       weight: weightNum,
-      bfPercent: bfNum,
+      bodyfat: bfNum,
     };
 
-    if (onAddProgress) {
-      onAddProgress(newEntry);
+    try {
+      const savedEntry = await weightService.create(newEntry);
+      setWeights((prev) => [savedEntry, ...prev]);
+      setSuccess('Progress logged!');
+      setError('');
+      setWeight('');
+      setBfPercent('');
+    } catch (err) {
+      console.error(err);
+      setError('Failed to log progress.');
+      setSuccess('');
     }
-
-    setWeight('');
-    setBfPercent('');
-    setError('');
-    setSuccess('Progress logged!');
   };
 
+  const chartData = weights.map(({ date, weight, bodyfat }) => ({
+    date: new Date(date).toISOString(),
+    weight,
+    bfPercent: bodyfat,
+  }));
+
   return (
-    <div className='CompTrackerContainer'>
+    <div className="CompTrackerContainer">
       <h2>Body Composition</h2>
 
       <ResponsiveContainer width="100%" height={300}>
@@ -62,18 +80,16 @@ function CompTracker({ progress = [], onAddProgress }) {
           <XAxis
             dataKey="date"
             tickFormatter={(str) =>
-              new Date(str).toLocaleString([], {
+              new Date(str).toLocaleDateString(undefined, {
                 month: 'short',
                 day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
               })
             }
           />
           <YAxis />
           <Tooltip
             labelFormatter={(str) =>
-              new Date(str).toLocaleString([], {
+              new Date(str).toLocaleString(undefined, {
                 month: 'short',
                 day: 'numeric',
                 hour: '2-digit',
@@ -96,40 +112,38 @@ function CompTracker({ progress = [], onAddProgress }) {
             stroke="#FF073A"
             strokeDasharray="5 5"
             strokeWidth={2}
-            dot={{ stroke: '#00FFFF', strokeWidth: 2, r: 3 }}
+            dot={{ stroke: '#FF073A', strokeWidth: 2, r: 3 }}
             name="Body Fat (%)"
           />
         </LineChart>
       </ResponsiveContainer>
 
-        <form className="CompTrackerForm" onSubmit={handleSubmit}>
-          <div className='ComptrackerInputs'>
-            <div>
-              <label>Weight (lbs):</label>
-              <input
-                type="number"
-                step="0.1"
-                value={weight}
-                onChange={(e) => setWeight(e.target.value)}
-              />
-            </div>
-            <div className="FormGroup">
-              <label>Body Fat (%):</label>
-              <input
-                type="number"
-                step="0.1"
-                value={bfPercent}
-                onChange={(e) => setBfPercent(e.target.value)}
-              />
-            </div>
+      <form className="CompTrackerForm" onSubmit={handleSubmit}>
+        <div className="ComptrackerInputs">
+          <div>
+            <label>Weight (lbs):</label>
+            <input
+              type="number"
+              step="0.1"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+            />
           </div>
+          <div>
+            <label>Body Fat (%):</label>
+            <input
+              type="number"
+              step="0.1"
+              value={bfPercent}
+              onChange={(e) => setBfPercent(e.target.value)}
+            />
+          </div>
+        </div>
 
-          <button type="submit">Log update</button>
-          {error && <p>{error}</p>}
-          {success && <p>{success}</p>}
-        </form>
-
-
+        <button type="submit">Log update</button>
+        {error && <p className="error">{error}</p>}
+        {success && <p className="success">{success}</p>}
+      </form>
     </div>
   );
 }

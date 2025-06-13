@@ -4,7 +4,7 @@ module.exports = {
     index,
     update,
     show,
-    addProgress,
+    
 };
 
 
@@ -51,16 +51,3 @@ async function show(req, res) {
 }
 
 
-async function addProgress(req, res) {
-  try {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ message: 'User not found' });
-
-    user.progress.push(req.body);
-    await user.save();
-    res.json(user);
-  } catch (err) {
-    console.error(err);
-    res.status(400).json({ message: 'Failed to add progress' });
-  }
-}

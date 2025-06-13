@@ -16,27 +16,23 @@ export default function HomePage({ user }) {
     }
   }
 
-  return (
-    <div className='HomePageContainer'>
-      
-      <div>
-        <div>
-          <StatSummary user={user}/>
-        </div>
-        <div>
-          {userData && userData.progress?.length > 0 ? (
-            <CompTracker
-              progress={userData.progress}
-              onAddProgress={handleAddProgress}
-            />
-          ) : (
-            <p>No progress data available.</p>
-          )}
-        </div>
-        <div>
-          <AchevementTracker user={userData} />
-        </div>
+    return (
+      <div className='HomePageContainer'>
+        {user ? (
+          <div>
+            <div>
+              <StatSummary user={user} />
+            </div>
+            <div>
+              <CompTracker />
+            </div>
+            <div>
+              <AchevementTracker user={userData} />
+            </div>
+          </div>
+        ) : (
+          <p>Please log in to view your dashboard.</p>
+        )}
       </div>
-    </div>
-  );
+    );
 }

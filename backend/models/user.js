@@ -4,11 +4,7 @@ const bcrypt = require('bcrypt');
 
 const SALT_ROUNDS = 6;
 
-const progressSchema = new Schema({
-  date: { type: Date, default: Date.now },
-  weight: { type: Number, required: true },
-  bfPercent: { type: Number, required: true },
-});
+
 
 const userSchema = new Schema(
   {
@@ -35,7 +31,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    progress: [progressSchema],
+    
   },
   {
     timestamps: true,

@@ -25,6 +25,7 @@ app.use(require('./middleware/checkToken'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/exercise', require('./routes/exercise'));
 app.use('/api/user', require('./routes/user'));
+app.use('/api/weight', require('./routes/weight'));
 
 
 // Use a "catch-all" route to deliver the frontend's production index.html

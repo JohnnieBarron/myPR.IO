@@ -96,26 +96,7 @@ export default function SignUpPage({ setUser }) {
             required
             min="0"
           />
-        <label>weight (in pounds)</label>
-          <input
-            type="number"
-            name="weight"
-            value={formData.weight}
-            onChange={handleChange}
-            required
-            min="0"
-          />
-        <label>Body Fat percentage</label>
-          <input
-            type="number"
-            name="bfPercent"
-            value={formData.bfPercent}
-            onChange={handleChange}
-            required
-            min="0"
-            max="100"
-            step="0.1"
-          />
+
         <label>Gender</label>
         <div>
           <label>
