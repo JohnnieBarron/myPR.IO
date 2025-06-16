@@ -1,0 +1,109 @@
+.progressForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  border-width: 2px;     
+  border-style: solid;   
+  border-color: #00FFFF;   
+  border-radius: 2px;    
+  padding: 10px;
+  background-color: #1C1C1E;
+  color: #E5E5E5;
+  margin-top: 10px;
+}
+
+.PEntries, .pListBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  border-width: 2px;     
+  border-style: solid;   
+  border-color: #00FFFF;   
+  border-radius: 2px;    
+  padding: 10px;
+  background-color: #1C1C1E;
+  color: #E5E5E5;
+  margin-top: 10px;
+
+}
+
+.pListBox {
+  width: 35vmin;
+  max-height: 550px; 
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: 100px;
+  padding-right: 6px; 
+  scrollbar-width: thin;
+  scrollbar-color: #00ffff #1C1C1E;
+}
+
+.pListBox::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pListBox::-webkit-scrollbar-thumb {
+  background-color: #00ffff;
+  border-radius: 4px;
+}
+
+.pListBox::-webkit-scrollbar-track {
+  background: #1C1C1E;
+}
+
+.e1 {
+  margin: 0;
+}
+
+.pLI {
+  list-style: none;
+  background-color: #2A2A2D; 
+  border: 1px solid #00FFFF;
+  border-radius: 8px;
+  padding: 6px 6px;
+  margin: 0 0 10px 0; ;
+  color: #E5E5E5;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pLI:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.4);
+}
+
+.pGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px 6px;
+  width: 100%;
+}
+
+.pitem {
+  margin: 0;
+  background-color: #1C1C1E;
+  padding: 6px 8px;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0, 255, 255, 0.1);
+  white-space: nowrap;          
+}
+
+.pShowCon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap; 
+  margin-top: 20px;
+}
+
+.PEntries, .pListBox {
+  min-width: 280px;
+  max-width: 400px;
+  flex: 1;
+}
