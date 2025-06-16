@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import * as exercisesService from '../../services/exerciseServices';
+import './NewExercisesPage.css'
 
 export default function NewExercisesPage() {
   const [name, setName] = useState('');
@@ -45,7 +46,8 @@ export default function NewExercisesPage() {
   }
 
   return (
-    <>
+    <div className='NEWeForm'>
+    
       <h2>Add Exercise</h2>
       <form onSubmit={handleSubmit}>
         <label>Name:</label>
@@ -107,6 +109,7 @@ export default function NewExercisesPage() {
         <button type="submit">Add Exercise</button>
       </form>
       <p className="error-message">{errorMsg}</p>
-    </>
+    
+    </div>
   );
 }
