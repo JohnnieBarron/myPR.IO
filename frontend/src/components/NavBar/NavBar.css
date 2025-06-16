@@ -2,8 +2,15 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 2vmin;
+  padding: 1px;
   font-size: 2vmin;
+  border-width: 2px;     
+  border-style: solid;   
+  border-color: #00FFFF;   
+  border-radius: 2px;  
+  color: #E5E5E5;
+  margin: 10px;
+  background-color: #1C1C1E;
 }
 
 .NavBar {
@@ -11,7 +18,8 @@
     border-radius: 0.8vmin;
     padding: 0.5vmin 1.5vmin;
     text-decoration: none;
-    color: #1a1a1a;
+    color: #E5E5E5;
+    
   }
 
   a:hover {
@@ -24,7 +32,5 @@
     color: whitesmoke;
   }
 
-  span {
-    color: rgb(108, 9, 87);
-  }
+ 
 }

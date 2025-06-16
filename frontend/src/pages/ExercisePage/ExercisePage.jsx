@@ -15,7 +15,7 @@ export default function ExerciseListPage() {
 
   return (
   <>
-    <h1>Exercise Page</h1>
+    
     <ExerciseList />
   </>
 );

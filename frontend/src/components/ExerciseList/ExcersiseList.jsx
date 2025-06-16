@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as exerciseService from '../../services/exerciseServices';
 import { useNavigate } from 'react-router';
+import './ExerciseList.css';
 
 function ExerciseList() {
   const [exercises, setExercises] = useState([]);
@@ -42,8 +43,8 @@ function ExerciseList() {
   });
 
   return (
-    <div>
-      <h1>Exercise List</h1>
+    <div className='ExerciseList'>
+      <h1>Exercise Log</h1>
 
       <input
         type="text"
@@ -71,22 +72,24 @@ function ExerciseList() {
         </label>
       </div>
 
-      {filteredExercises.length > 0 ? (
-        <ul>
-          {filteredExercises.map((exercise) => (
-            <li key={exercise._id}>
-              <button onClick={() => navigate(`/exercises/${exercise._id}`)}>
-                {exercise.name}
-              </button>{' '}
-              ({exercise.category},{' '}
-              {new Date(exercise.progress[0]?.date).toLocaleDateString()})
-              <button onClick={() => handleDelete(exercise._id)}>🗑️ Delete</button>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No exercises match your criteria.</p>
-      )}
+      <div className='ELIST'>
+        {filteredExercises.length > 0 ? (
+          <ul>
+            {filteredExercises.map((exercise) => (
+              <li className='ELI' key={exercise._id}>
+                <button onClick={() => navigate(`/exercises/${exercise._id}`)}>
+                  {exercise.name}
+                </button>{' '}
+                ({exercise.category},{' '}
+                {new Date(exercise.progress[0]?.date).toLocaleDateString()})
+                <button className='EDELETE' onClick={() => handleDelete(exercise._id)}>🗑️ Delete</button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No exercises match your criteria.</p>
+        )}
+      </div>
 
       <button onClick={() => navigate('/exercises/new')}>➕ Add New Exercise</button>
     </div>
