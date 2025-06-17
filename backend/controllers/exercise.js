@@ -11,13 +11,11 @@ module.exports = {
 
 async function index(req, res) {
   try {
-    const exercise = await Exercise.find({});
-    // Below would return all posts for just the logged in user
-    // const posts = await Post.find({author: req.user._id});
-    res.json(exercise);
+    const exercises = await Exercise.find({ user: req.user._id });
+    res.json(exercises);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: 'Failed to fetch exercise' });
+    res.status(500).json({ message: 'Failed to fetch exercises' });
   }
 }
 
