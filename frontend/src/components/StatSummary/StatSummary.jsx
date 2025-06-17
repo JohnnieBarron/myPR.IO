@@ -1,17 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './StatSummary.css';
 
-function StatSummary({ user }) {
-  const [lastLoggedMeal, setLastLoggedMeal] = useState(0);
-  const [lastLoggedExercise, setLastLoggedExercise] = useState(0);
-  const [lastAchievement, setLastAchievement] = useState(0);
-
+function StatSummary({ user, lastLoggedMeal, lastLoggedExercise, lastAchievement, lastWeight, lastWeightDate }) {
   return (
     <div className='StatSummary'>
-      <h1 className='StatGreeting'>Hello {user.firstName }</h1>
-      <p className='SummeryEntry'>lastLoggedMeal PH</p>
-      <p className='SummeryEntry'>lastLoggedExercise PH</p>
-      <p className='SummeryEntry'>lastAchievement PH</p>
+      <h1 className='StatGreeting'>Hello {user.firstName}</h1>
+
+      <p className='SummeryEntry'>
+        🍽️ Last Logged Meal:{' '}
+        {lastLoggedMeal ? new Date(lastLoggedMeal).toLocaleDateString() : 'No meals logged'}
+      </p>
+
+      <p className='SummeryEntry'>
+        🏋️ Last Logged Exercise:{' '}
+        {lastLoggedExercise ? new Date(lastLoggedExercise).toLocaleDateString() : 'No exercises logged'}
+      </p>
+
+      <p className='SummeryEntry'>
+        🏆 Last Achievement Earned:{' '}
+        {lastAchievement ? new Date(lastAchievement).toLocaleDateString() : 'No achievements yet'}
+      </p>
+
+      <p className='SummeryEntry'>
+        ⚖️ Last Weight Entry:{' '}
+        {lastWeightDate
+          ? `${new Date(lastWeightDate).toLocaleDateString()})`
+          : 'No weight logged'}
+      </p>
     </div>
   );
 }

@@ -1,12 +1,6 @@
 const achievements = [
   // First-Time Achievements
   {
-    id: 'first-workout',
-    name: 'First Workout',
-    description: 'Complete your first workout session.',
-    type: 'milestone',
-  },
-  {
     id: 'first-meal',
     name: 'First Meal Logged',
     description: 'Log your first meal in the app.',

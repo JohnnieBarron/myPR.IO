@@ -1,14 +1,32 @@
 .ATracker {
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  justify-content: center; 
-  border-width: 2px;     
-  border-style: solid;   
-  border-color: #00FFFF;   
-  border-radius: 2px;    
-  padding: 10px;
+  align-items: center;
+  border: 2px solid #00FFFF;
+  border-radius: 8px;
+  padding: 16px;
   background-color: #1C1C1E;
   color: #E5E5E5;
   margin-top: 10px;
+  max-height: 400px; 
+  overflow-y: auto;  
+  width: 100%;
+ 
+}
+
+.achievement-list {
+  display: grid;
+  grid-template-columns: repeat(2, fr); 
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.achievement-list li {
+  background-color: #2a2a2d;
+  padding: 8px;
+  border-radius: 6px;
+  box-shadow: 0 0 5px #00ffff55;
 }
