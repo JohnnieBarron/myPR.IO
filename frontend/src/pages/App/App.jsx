@@ -9,6 +9,8 @@ import LogInPage from '../LogInPage/LogInPage';
 import NavBar from '../../components/NavBar/NavBar';
 import ShowExercise from '../ShowExercisePage/ShowExcercisePage';
 import ProfilePage from '../ProfilePage/ProfilePage';
+import MealsPage from '../MealsPage/MealsPage';
+
 import './App.css';
 
 
@@ -30,6 +32,7 @@ export default function App() {
             <Route path="/exercises/new" element={<NewExercisesPage />} />
             <Route path="/exercises/:_id" element={<ShowExercise />} />
             <Route path="/users/:id" element={<ProfilePage />} />
+            <Route path="/meals" element={<MealsPage />} />
             <Route path="*" element={null} />
           </Routes>
         ) : (

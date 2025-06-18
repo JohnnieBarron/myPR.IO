@@ -23,7 +23,7 @@ export default function NavBar({ user, setUser }) {
             Exercises
           </NavLink>
           &nbsp; | &nbsp;
-          <NavLink to="/posts/new">Meals</NavLink>
+          <NavLink to="/meals">Meals</NavLink>
           &nbsp; | &nbsp;
           <Link to="/" onClick={handleLogOut}>Log Out</Link>
         </>

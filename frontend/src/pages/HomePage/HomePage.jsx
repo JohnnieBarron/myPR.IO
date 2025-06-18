@@ -4,6 +4,7 @@ import CompTracker from '../../components/CompTracker/CompTracker';
 import AchevementTracker from '../../components/AchevementTracker/AchevementTracker';
 import * as exerciseService from '../../services/exerciseServices'; 
 import { updateUserProgress } from '../../services/userServices';
+import LandingPage from '../LandingPage/LandingPage';
 
 export default function HomePage({ user }) {
   const [userData, setUserData] = useState(user);
@@ -76,7 +77,9 @@ export default function HomePage({ user }) {
           <AchevementTracker user={userForAchievements} />
         </div>
       ) : (
-        <p>Please log in to view your dashboard.</p>
+        <div>
+        <LandingPage />
+        </div>
       )}
     </div>
   );
