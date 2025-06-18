@@ -35,7 +35,7 @@ myPR.IO was created to solve these problems — empowering users to stay motivat
 
 ## 🛠️ Getting Started
 
-<!-- - [Click to View myPR.IO](https://elevateself-828b3b1b74f3.herokuapp.com/) -->
+- [Click to View myPR.IO](https://mypr-io-app-9ccd9373ea98.herokuapp.com/)
 
 
 
