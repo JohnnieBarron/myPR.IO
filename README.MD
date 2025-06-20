@@ -32,6 +32,9 @@ myPR.IO was created to solve these problems — empowering users to stay motivat
 - MongoDB
 - Mongoose
 - REACT
+- Recharts
+- JWT
+- bcrypt
 
 ## 🛠️ Getting Started
 
