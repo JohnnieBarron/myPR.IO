@@ -47,6 +47,7 @@ myPR.IO was created to solve these problems — empowering users to stay motivat
 Here are some features planned for future versions of Elevate:
 
 - **Meal Traking** – In the Furture I will be adding Meal tracking features allowing you to calculate a daily calorie goal, Macros breakdown, and a calorie tracker
+- **stat tracking** - I will be adding percentiles to lifts to offer realist examples of how fit you actualy are, ex. ' you are in the top 2% of lifters/runners'
 
 
 
